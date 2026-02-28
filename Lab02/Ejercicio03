@@ -1,0 +1,17 @@
+no_ataca(_, [], _).
+no_ataca(Fila, [OtraFila|Resto], Dist) :-
+    Fila =\= OtraFila,
+    Diff is abs(Fila - OtraFila),
+    Diff =\= Dist,
+    Dist1 is Dist + 1,
+    no_ataca(Fila, Resto, Dist1).
+
+reinas([], _).
+reinas([Fila|Resto], N) :-
+    reinas(Resto, N),
+    between(1, N, Fila),
+    no_ataca(Fila, Resto, 1).
+
+solucion(S) :-
+    length(S, 8),
+    reinas(S, 8).
